@@ -55,26 +55,25 @@
             </div>
 
           </form>
-
+          @foreach($noticias as $noticia)
           <article class="box-noticia">
             <!--Notícia-->
-            <a href="/noticias/nova-previdencia-e-os-municipios-editorial-do-estadao-trata-o-assunto-e-menciona-a-cnm">
+            <a href="{{ $noticia->url }}">
               <figure>
-                <img src="http://www.cnm.org.br/cms/images/stories/comunicacao_novo/geral/18072016_divulgacao_jornal.jpg" alt="">
+                <img src="{{ $noticia->imagem }}" class="rounded float-left" style="height:200px;" alt="">
               </figure>
-              <div class="texto-lista-noticias">
-                <span class="data-lista-noticia">segunda, 15 de abril de 2019</span>
-                <h1>Nova Previdência e os Municípios: editorial do Estadão trata o assunto e menciona a CNM</h1>
-                <p>A Nova Previd&ecirc;ncia e o impacto nos Munic&iacute;pios foram os assuntos de editorial do O Estado
-                  de S&atilde;o Paulo desta segunda-feira, 15 de abril. Ao afirmar al&iacute;vio fiscal de cerca de R$
-                  171 bilh&otilde;es, que a reforma da Previd&ecirc;ncia pode propiciar aos Munic&iacute;pios em 10
-                  anos, o texto menci...</p>
+              <div class="texto-lista-noticias " style="overflow: hidden;">
+                <span class="data-lista-noticia">{{ $noticia->categoria }} - {{ $noticia->data_formatada }}</span>
+                <h1>{{ $noticia->titulo }}</h1>
+                <span name="mensagem" maxlength="300" disabled>{{ substr($noticia->texto, 0, 300) }}</span>
+
+                <p></p>
               </div>
             </a>
           </article>
           <!--Fim Notícia-->
           <hr>
-
+          @endforeach
 
 
           <ul class="pagination">
@@ -105,11 +104,7 @@
   <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 
-  <script>
-    $(document).ready(function() {
 
-    });
-  </script>
 
 </body>
 
