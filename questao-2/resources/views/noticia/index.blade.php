@@ -48,14 +48,21 @@
         <div class="lista">
           <!--Lista de Noticias-->
 
-          <form action="" class="form-group row">
+          <form class="form-group row">
+
             <div class="col-12 busca">
-              <input type="text" class="form-control col-8" placeholder="Digite sua busca">
-              <button class="btn btn-primary col-2"> Buscar </button>
+
+              <input type="text" name="pesquisa" class="form-control col-8" placeholder="Digite sua busca">
+
+              <input type="submit" class="btn btn-primary col-2 ml-3" value="Buscar">
+
+
             </div>
 
           </form>
+          @if($noticias)
           @foreach($noticias as $noticia)
+
           <article class="box-noticia">
             <!--Notícia-->
             <a href="{{ $noticia->url }}">
@@ -73,21 +80,43 @@
           </article>
           <!--Fim Notícia-->
           <hr>
+
           @endforeach
+          @else
+          <article class="box-noticia">
+            <!--Notícia-->
+
+            <div class="texto-lista-noticias " style="overflow: hidden;">
+              <h1>Nenhuma notícia encontrada</h1>
+            </div>
+
+          </article>
+          <!--Fim Notícia-->
+          <hr>
+          @endif
+          <form class="form-group row">
+            <ul class="pagination">
 
 
-          <ul class="pagination">
-            <li class="active page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
+              @if( isset($paginacao['pesquisa']) )
 
+
+                @for ($i = 0; $i < $paginacao['paginacao']; $i++) <li class="page-item"><a class="page-link" href="?pesquisa={{$paginacao['pesquisa']}}&page={{$i+1}}">{{$i+1}}</a></li>
+
+                @endfor
+              @else
+                @for ($i = 0; $i < $paginacao['paginacao']; $i++) 
+                
+                <li class="page-item"><a class="page-link" href="?page={{$i+1}}">{{$i+1}}</a></li>
+
+                @endfor
+              @endif
+
+
+
+
+            </ul>
+          </form>
 
           <!--Fim Paginação-->
 

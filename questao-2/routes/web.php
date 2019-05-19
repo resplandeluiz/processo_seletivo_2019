@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/noticia','NoticiaController@index');
+Route::get('/noticia{pesquisa?}','NoticiaController@index');
+
